@@ -23,9 +23,9 @@ class ResimGecisi extends StatefulWidget
 class ResimGecisiState extends State<ResimGecisi> {
   int _currentIndex=0;
   final List<String> _images =[
-    'assets/images/image1.jpeg',
-    'assets/images/image2.jpeg',
-    'assets/images/image3.jpeg'
+    'images/image1.jpeg',
+    'images/image2.jpeg',
+    'images/image3.jpeg'
   ];
 
   void _nextImage() {
@@ -41,7 +41,7 @@ class ResimGecisiState extends State<ResimGecisi> {
   Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: Text('Resim Geçişi'),
+      title: const Text('Resim Geçişi'),
     ),
     body: Center(
       child: Column(
@@ -53,7 +53,7 @@ class ResimGecisiState extends State<ResimGecisi> {
             child: Image.asset(_images[_currentIndex],
             ),
             ),
-           SizedBox(height: 30),
+           const SizedBox(height: 30),
           ElevatedButton(
             style: const ButtonStyle(
     backgroundColor: WidgetStatePropertyAll <Color>(Colors.green),
