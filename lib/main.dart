@@ -1,80 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(MyApp());
+  print("İlk işlem başarılı olarak çalıştırıldı.");
+  //islem(selamlamaMetni, sayi);
+
+  runApp(myApp);
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Row, Stack, Expand, Örneği'),
-        ),
-        body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      color: Colors.red,
-                      child: const Text('Kırmızı Kutu'),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      color: Colors.blue,
-                      child: const Text('Mavi Kutu'),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      color: const Color.fromARGB(255, 54, 244, 79),
-                      child: const Text('Yeşil Kutu'),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
+String name = "Erdenay";
 
-                
-                const SizedBox(height: 20),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        height: 300,
-                        color: Colors.purple,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: 200,
-                              height: 200,
-                              color: Colors.yellow,
-                            ),
-                            Container(
-                              width: 150,
-                              height: 150,
-                              color: Colors.orange,
-                            ),
-                            Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.red,
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ]),
+Widget myApp = MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: Scaffold(
+    appBar: AppBar(
+      title: const Text("Home"),
+      actions: [
+        IconButton(
+          icon: const Icon(
+            Icons.notifications,
+            size: 30,
+          ),
+          onPressed: () {},
         ),
+        IconButton(
+          icon: const Icon(
+            Icons.shopping_bag,
+            size: 30,
+          ),
+          onPressed: () {},
+        ),
+      ],
+      //centerTitle: true,
+    ),
+    body: Center(
+      child: Text(
+        'Hello $name! How are you?',
       ),
-    );
+    ),
+    drawer: const Drawer(),
+  ),
+);
+
+String selamlamaMetni = 'Merhaba Arkadaşlar';
+
+int sayi = 5;
+
+String isim = "Erdenay";
+String soyisim = "Cafer";
+
+int yas = 22;
+double kilo = 70.45;
+
+bool askerlikYaptimi = false;
+
+List<int> okullaGecenYillar = [2013, 2014, 2015, 2016];
+
+class Insan {
+  String isim;
+  String soyisim;
+
+  int yas;
+
+  double kilo;
+
+  bool askerlikYaptimi;
+
+  List<int> okullaGecenYillar;
+
+  Insan(
+    this.isim,
+    this.soyisim,
+    this.yas,
+    this.kilo,
+    this.askerlikYaptimi,
+    this.okullaGecenYillar,
+  ) {
+    print('Insan sınıfı oluşturuldu.');
+  }
+}
+
+class Ogrenci extends Insan {
+  String okulNumara;
+  String okulIsmi;
+
+  Ogrenci(
+    super.isim,
+    super.soyisim,
+    super.yas,
+    super.kilo,
+    super.askerlikYaptimi,
+    super.okullaGecenYillar,
+    this.okulNumara,
+    this.okulIsmi,
+  ) {
+    print('Ogrenci sınıfı oluşturuldu.');
   }
 }
