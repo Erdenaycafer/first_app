@@ -201,62 +201,79 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      children: [
-                        Text(
-                          "Deal of the day",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, // Yazıyı kalın yapar
-                          ),
-                        ),
-                        Spacer(),
-                        Text("View All ->"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        CountdownTimer(),
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(height: 16),
+              Container(
+                color: const Color.fromARGB(255, 237, 237, 237),
+                child: Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
                         children: [
-                          Center(
-                            child: Wrap(
-                              spacing: 80.0, // Resimler arasındaki yatay boşluk
-                              runSpacing: 16.0, // Satırlar arasındaki boşluk
-                              alignment: WrapAlignment.center,
-                              children: [
-                                MyImageWithText(
-                                  imageUrl: 'assets/images/image_140.png',
-                                  text: '%40 OFF',
-                                ),
-                                MyImageWithText(
-                                  imageUrl: 'assets/images/image_140.png',
-                                  text: '%60 OFF',
-                                ),
-                                MyImageWithText(
-                                  imageUrl: 'assets/images/image_140.png',
-                                  text: 'Lorem ipsum',
-                                ),
-                                // Daha fazla MyImageWithText widget'ı buraya eklenebilir
-                              ],
+                          Text(
+                            "Deal of the day",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold, // Yazıyı kalın yapar
                             ),
                           ),
+                          Spacer(),
+                          Text("View All ->"),
                         ],
                       ),
-                    ),
-                    const Row(
-                      children: [Padding(padding: const EdgeInsets.all(25.0))],
-                    )
-                  ],
+                      Row(
+                        children: [
+                          CountdownTimer(),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.all(16.0), // Padding ekledim
+
+                              decoration: BoxDecoration(
+                                color: Colors.white, // Arka plan rengi
+                                borderRadius:
+                                    BorderRadius.circular(5), // Border radius
+                              ),
+                              child: const Center(
+                                child: Wrap(
+                                  spacing:
+                                      10.0, // Resimler arasındaki yatay boşluk
+                                  runSpacing:
+                                      16.0, // Satırlar arasındaki boşluk
+                                  alignment: WrapAlignment.center,
+                                  children: [
+                                    MyImageWithText(
+                                      imageUrl: 'assets/images/image_140.png',
+                                      text: '%40 OFF',
+                                    ),
+                                    MyImageWithText(
+                                      imageUrl: 'assets/images/image_140.png',
+                                      text: '%60 OFF',
+                                    ),
+                                    MyImageWithText(
+                                      imageUrl: 'assets/images/image_140.png',
+                                      text: 'Lorem ipsum',
+                                    ),
+                                    // Daha fazla MyImageWithText widget'ı buraya eklenebilir
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Row(
+                        children: [
+                          Padding(padding: const EdgeInsets.all(25.0))
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],
