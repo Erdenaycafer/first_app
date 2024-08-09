@@ -190,7 +190,7 @@ class MyApp extends StatelessWidget {
                   controller: controller,
                   children: <Widget>[
                     Center(
-                      child: Image.asset('assets/images/image1.jpeg'),
+                      child: Image.asset('assets/images/sliderSnickers.png'),
                     ),
                     Center(
                       child: Image.asset('assets/images/image2.jpeg'),
@@ -232,7 +232,8 @@ class MyApp extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                padding: const EdgeInsets.all(16.0), // Padding ekledim
+                              padding:
+                                  const EdgeInsets.all(16.0), // Padding ekledim
 
                               decoration: BoxDecoration(
                                 color: Colors.white, // Arka plan rengi
@@ -248,18 +249,25 @@ class MyApp extends StatelessWidget {
                                   alignment: WrapAlignment.center,
                                   children: [
                                     MyImageWithText(
-                                      imageUrl: 'assets/images/image_140.png',
-                                      text: '%40 OFF',
+                                      imageUrl: 'assets/images/shoe.png',
+                                      text: 'Sneakers',
+                                      discountText: '%40 OFF',
                                     ),
                                     MyImageWithText(
-                                      imageUrl: 'assets/images/image_140.png',
-                                      text: '%60 OFF',
+                                      imageUrl: 'assets/images/shoe.png',
+                                      text: 'Running shoes',
+                                      discountText: '%40 OFF',
                                     ),
                                     MyImageWithText(
-                                      imageUrl: 'assets/images/image_140.png',
+                                      imageUrl: 'assets/images/shoe.png',
                                       text: 'Lorem ipsum',
+                                      discountText: '%40 OFF',
                                     ),
-                                    // Daha fazla MyImageWithText widget'ı buraya eklenebilir
+                                    MyImageWithText(
+                                      imageUrl: 'assets/images/shoe.png',
+                                      text: 'Lorem ipsum',
+                                      discountText: '%40 OFF',
+                                    ),
                                   ],
                                 ),
                               ),
@@ -269,7 +277,7 @@ class MyApp extends StatelessWidget {
                       ),
                       const Row(
                         children: [
-                          Padding(padding: const EdgeInsets.all(25.0))
+                          Padding(padding: EdgeInsets.all(25.0))
                         ],
                       )
                     ],
@@ -291,7 +299,7 @@ class CountdownTimer extends StatefulWidget {
 
 class _CountdownTimerState extends State<CountdownTimer> {
   late Timer _timer;
-  Duration _remainingTime = Duration();
+  Duration _remainingTime = const Duration();
 
   @override
   void initState() {
@@ -384,12 +392,14 @@ class _CountdownTimerState extends State<CountdownTimer> {
 class MyImageWithText extends StatelessWidget {
   final String imageUrl;
   final String text;
+  final String discountText;
 
   const MyImageWithText({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.text,
-  }) : super(key: key);
+    required this.discountText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -413,7 +423,25 @@ class MyImageWithText extends StatelessWidget {
           text,
           style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            //fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        Container(
+          width: 100,
+          height: 20,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 182, 48, 38),
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+          ),
+          child: Text(
+            discountText,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              //fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
       ],
