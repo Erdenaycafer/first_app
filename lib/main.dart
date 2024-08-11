@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:ui';
+// import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -183,6 +185,14 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              // Swiper(
+              //   itemBuilder: (BuildContext context, int index) {
+              //     return Image.asset('assets/images/sliderSnickers.png');
+              //   },
+              //   itemCount: 3,
+              //   pagination: const SwiperPagination(),
+              //   control: const SwiperControl(),
+              // ),
               SizedBox(
                 width: 390,
                 height: 400,
@@ -205,7 +215,7 @@ class MyApp extends StatelessWidget {
               Container(
                 color: const Color.fromARGB(255, 237, 237, 237),
                 child: Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -227,25 +237,21 @@ class MyApp extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(25.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding:
-                                  const EdgeInsets.all(16.0), // Padding ekledim
-
+                              padding: const EdgeInsets.all(16.0),
                               decoration: BoxDecoration(
-                                color: Colors.white, // Arka plan rengi
+                                color: Colors.white,
                                 borderRadius:
                                     BorderRadius.circular(5), // Border radius
                               ),
                               child: const Center(
                                 child: Wrap(
-                                  spacing:
-                                      10.0, // Resimler arasındaki yatay boşluk
-                                  runSpacing:
-                                      16.0, // Satırlar arasındaki boşluk
+                                  spacing: 15.0,
+                                  runSpacing: 15.0,
                                   alignment: WrapAlignment.center,
                                   children: [
                                     MyImageWithText(
@@ -275,15 +281,56 @@ class MyApp extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Row(
-                        children: [
-                          Padding(padding: EdgeInsets.all(25.0))
-                        ],
-                      )
                     ],
                   ),
                 ),
               ),
+              const Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const Row(
+                      children: [
+                        Text(
+                          'Hot Selling Footwear',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Spacer(),
+                        Text("View All ->"),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          // hotSellingImages(
+                          //   imageUrl: 'assets/images/image_140.png',
+                          //   text: 'Lorem',
+                          //   discountText: '%40',
+                          // ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+
+              const hotSellingImages(
+                  imageUrl: 'shoe.png',
+                  title: 'Lorem impsum lorem impsum lorem impsum lorem impsum',
+                  price: 136,
+                  discountRate: 50,
+                  rate: '4',
+                  isLiked: true,
+                  sellerCount: 6)
             ],
           ),
         ),
@@ -311,17 +358,22 @@ class _CountdownTimerState extends State<CountdownTimer> {
     DateTime startTime = DateTime.now();
     DateTime targetTime = startTime.add(const Duration(days: 2));
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      DateTime currentTime = DateTime.now();
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer timer) {
+        DateTime currentTime = DateTime.now();
 
-      setState(() {
-        _remainingTime = targetTime.difference(currentTime);
+        setState(
+          () {
+            _remainingTime = targetTime.difference(currentTime);
 
-        if (_remainingTime.isNegative) {
-          _timer.cancel();
-        }
-      });
-    });
+            if (_remainingTime.isNegative) {
+              _timer.cancel();
+            }
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -352,7 +404,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 text: '$hours',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20, // Saatlerin boyutu daha büyük
+                  fontSize: 20,
                 ),
               ),
               const TextSpan(
@@ -363,7 +415,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 text: '$minutes',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20, // Dakikaların boyutu daha büyük
+                  fontSize: 20,
                 ),
               ),
               const TextSpan(
@@ -374,7 +426,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 text: '$seconds',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20, // Saniyelerin boyutu daha büyük
+                  fontSize: 20,
                 ),
               ),
               const TextSpan(
@@ -414,11 +466,10 @@ class MyImageWithText extends StatelessWidget {
               image: AssetImage(imageUrl), // Resim yolu
               fit: BoxFit.cover,
             ),
-            borderRadius:
-                BorderRadius.circular(8), // İsteğe bağlı köşe yuvarlama
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
-        const SizedBox(height: 8), // Resim ile yazı arasına boşluk ekler
+        const SizedBox(height: 8),
         Text(
           text,
           style: const TextStyle(
@@ -426,7 +477,6 @@ class MyImageWithText extends StatelessWidget {
             //fontWeight: FontWeight.bold,
           ),
         ),
-
         Container(
           width: 100,
           height: 20,
@@ -444,6 +494,99 @@ class MyImageWithText extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class hotSellingImages extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final double price;
+  final int discountRate;
+  final String rate;
+  final bool isLiked;
+  final int sellerCount;
+
+  const hotSellingImages({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.price,
+    required this.discountRate,
+    required this.rate,
+    required this.isLiked,
+    required this.sellerCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+            width: 140,
+            height: 140,
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: AssetImage('assets/images/shoe.png'), // Resim yolu
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              children: [
+                // Diğer widget'lar burada
+                sellerCount > 5
+                    ? Container(
+                      padding: const EdgeInsets.all(5),
+                        color: const Color.fromARGB(255, 255, 100, 0),
+                        child: const Text(
+                          'Top Seller',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10
+                            ),
+                        ),
+                      )
+                    : SizedBox
+                        .shrink(), // Koşul sağlanmadığında boş bir widget döndürür
+                // Diğer widget'lar burada
+              ],
+            )),
+        const SizedBox(
+          height: 6,
+        ),
+        
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 10,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '\$${(price * discountRate).toStringAsFixed(2)}', //%50 indirimli fiyat
+          style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          '$price',
+          style: const TextStyle(
+            color: Color.fromARGB(115, 2, 2, 2),
+            fontSize: 7,
+          ),
+        ),
+        Text(
+          '$discountRate% OFF',
+          style: TextStyle(
+            color: Colors.orange.shade700,
+            fontSize: 7,
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }
