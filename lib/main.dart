@@ -289,7 +289,7 @@ class MyApp extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Text(
                           'Hot Selling Footwear',
