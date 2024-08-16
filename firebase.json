@@ -1,18 +1,1 @@
-
-{
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
-
+{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"firebase-erdenay","appId":"1:434205063936:android:f9e702ba2cb7ca279e51e5","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"firebase-erdenay","configurations":{"android":"1:434205063936:android:f9e702ba2cb7ca279e51e5","ios":"1:434205063936:ios:3f588b4404bc8a2c9e51e5","macos":"1:434205063936:ios:3f588b4404bc8a2c9e51e5","web":"1:434205063936:web:6bb0820cff63e6979e51e5","windows":"1:434205063936:web:5bcf63a1851b04249e51e5"}}}}}}

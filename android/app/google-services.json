@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "434205063936",
+    "project_id": "firebase-erdenay",
+    "storage_bucket": "firebase-erdenay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434205063936:android:f9e702ba2cb7ca279e51e5",
+        "android_client_info": {
+          "package_name": "com.r.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl-CIbitvTRTZNzY3TczJ2tyl2125DYEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

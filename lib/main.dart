@@ -1,12 +1,19 @@
 import 'dart:async';
 import 'dart:ui';
 // import 'package:card_swiper/card_swiper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:main_app/firebase_options.dart';
+import 'package:main_app/widgets/anasayfa_urun_widget.dart';
+import 'package:main_app/widgets/category_widget.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -169,18 +176,25 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                     for (int i = 0; i < 10; i++)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                        child: InkWell(
-                          onTap: () {},
-                          child: const Column(
-                            children: [
-                              Icon(Icons.laptop),
-                              Text("Fashion"),
-                            ],
-                          ),
-                        ),
-                      ),
+                      FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('categories')
+                          .doc('XTPGFtFj8DmF3NXCe06e')
+                          .get(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          var data= snapshot.data;
+                          return CategoryWidget(
+                              title: data==null ? 'Bulunamadı': data['name'],
+                              imageUrl: 'assets/image/fashionIcon.png',
+                              );
+                        }
+                        else{
+                          return const CircularProgressIndicator();
+                        }
+                      },
+                    ),
+                    
                   ],
                 ),
               ),
@@ -242,7 +256,7 @@ class MyApp extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(7.0),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
@@ -285,11 +299,11 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Text(
                           'Hot Selling Footwear',
@@ -302,58 +316,56 @@ class MyApp extends StatelessWidget {
                         Text("View All ->"),
                       ],
                     ),
-                    SizedBox(
-                      height: 6,
-                    ),
+                    const SizedBox(height: 6),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Wrap(
                         spacing: 10,
                         children: [
-                          HotSellingImages(
-                            imageUrl: 'assets/images/shoe.png',
-                            title: 'Lorem impsum lorem impsum',
-                            price: 136,
-                            discountRate: 0.5,
-                            rate: '4',
-                            isLiked: true,
-                            sellerCount: 6,
+                          AnasayfaUrunWidget(
+                            resimUrl: 'assets/images/shoe.png',
+                            baslik: 'Lorem impsum lorem impsum',
+                            usdFiyat: 136,
+                            indirimOrani: 0.5,
+                            rating: '4',
+                            islike: true,
+                            satisSayisi: 6,
                           ),
-                          HotSellingImages(
-                            imageUrl: 'assets/images/shoe.png',
-                            title: 'Lorem impsum lorem impsum',
-                            price: 193,
-                            discountRate: 0.5,
-                            rate: '4',
-                            isLiked: false,
-                            sellerCount: 4,
+                          AnasayfaUrunWidget(
+                            resimUrl: 'assets/images/shoe.png',
+                            baslik: 'Lorem impsum lorem impsum',
+                            usdFiyat: 193,
+                            indirimOrani: 0.5,
+                            rating: '4',
+                            islike: false,
+                            satisSayisi: 4,
                           ),
-                          HotSellingImages(
-                            imageUrl: 'assets/images/shoe.png',
-                            title: 'Lorem impsum lorem impsum',
-                            price: 48,
-                            discountRate: 0.5,
-                            rate: '4',
-                            isLiked: true,
-                            sellerCount: 3,
+                          AnasayfaUrunWidget(
+                            resimUrl: 'assets/images/shoe.png',
+                            baslik: 'Lorem impsum lorem impsum',
+                            usdFiyat: 48,
+                            indirimOrani: 0.5,
+                            rating: '4',
+                            islike: true,
+                            satisSayisi: 3,
                           ),
-                          HotSellingImages(
-                            imageUrl: 'assets/images/shoe.png',
-                            title: 'Lorem impsum lorem impsum',
-                            price: 136,
-                            discountRate: 0.5,
-                            rate: '4',
-                            isLiked: true,
-                            sellerCount: 6,
+                          AnasayfaUrunWidget(
+                            resimUrl: 'assets/images/shoe.png',
+                            baslik: 'Lorem impsum lorem impsum',
+                            usdFiyat: 136,
+                            indirimOrani: 0.5,
+                            rating: '4',
+                            islike: true,
+                            satisSayisi: 6,
                           ),
-                          HotSellingImages(
-                            imageUrl: 'assets/images/shoe.png',
-                            title: 'Lorem impsum lorem impsum',
-                            price: 136,
-                            discountRate: 0.5,
-                            rate: '4',
-                            isLiked: true,
-                            sellerCount: 6,
+                          AnasayfaUrunWidget(
+                            resimUrl: 'assets/images/shoe.png',
+                            baslik: 'Lorem impsum lorem impsum',
+                            usdFiyat: 136,
+                            indirimOrani: 0.5,
+                            rating: '4',
+                            islike: true,
+                            satisSayisi: 6,
                           ),
                         ],
                       ),
@@ -553,147 +565,147 @@ class MyImageWithText extends StatelessWidget {
   }
 }
 
-class HotSellingImages extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final double price;
-  final double discountRate;
-  final String rate;
-  final bool isLiked;
-  final int sellerCount;
+// class HotSellingImages extends StatefulWidget {
+//   final String imageUrl;
+//   final String title;
+//   final double price;
+//   final double discountRate;
+//   final String rate;
+//   final bool isLiked;
+//   final int sellerCount;
 
-  const HotSellingImages({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.price,
-    required this.discountRate,
-    required this.rate,
-    required this.isLiked,
-    required this.sellerCount,
-  });
+//   const HotSellingImages({
+//     super.key,
+//     required this.imageUrl,
+//     required this.title,
+//     required this.price,
+//     required this.discountRate,
+//     required this.rate,
+//     required this.isLiked,
+//     required this.sellerCount,
+//   });
 
-  @override
-  _HotSellingImagesState createState() => _HotSellingImagesState();
-}
+//   @override
+//   _HotSellingImagesState createState() => _HotSellingImagesState();
+// }
 
-class _HotSellingImagesState extends State<HotSellingImages> {
-  late String imageUrl;
-  late String title;
-  late double price;
-  late double discountRate;
-  late String rate;
-  late bool isLiked = false;
-  late int sellerCount;
+// class _HotSellingImagesState extends State<HotSellingImages> {
+//   late String imageUrl;
+//   late String title;
+//   late double price;
+//   late double discountRate;
+//   late String rate;
+//   late bool isLiked = false;
+//   late int sellerCount;
 
-  @override
-  void initState() {
-    super.initState();
-    imageUrl = widget.imageUrl;
-    title = widget.title;
-    price = widget.price;
-    discountRate = widget.discountRate;
-    rate = widget.rate;
-    isLiked = widget.isLiked;
-    sellerCount = widget.sellerCount;
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     imageUrl = widget.imageUrl;
+//     title = widget.title;
+//     price = widget.price;
+//     discountRate = widget.discountRate;
+//     rate = widget.rate;
+//     isLiked = widget.isLiked;
+//     sellerCount = widget.sellerCount;
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 148,
-      height: 235,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 140,
-            height: 140,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imageUrl), // Resim yolu
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Stack(
-              children: [
-                sellerCount > 5
-                    ? Positioned(
-                        top: 5,
-                        left: 5,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 81, 0),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Text(
-                            'Top Seller',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      )
-                    : const SizedBox
-                        .shrink(), // Koşul sağlanmadığında boş bir widget döndürür
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: 148,
+//       height: 235,
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Container(
+//             width: 140,
+//             height: 140,
+//             decoration: BoxDecoration(
+//               image: DecorationImage(
+//                 image: AssetImage(imageUrl), // Resim yolu
+//                 fit: BoxFit.cover,
+//               ),
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             child: Stack(
+//               children: [
+//                 sellerCount > 5
+//                     ? Positioned(
+//                         top: 5,
+//                         left: 5,
+//                         child: Container(
+//                           padding: const EdgeInsets.all(5),
+//                           decoration: BoxDecoration(
+//                             color: const Color.fromARGB(255, 255, 81, 0),
+//                             borderRadius: BorderRadius.circular(4),
+//                           ),
+//                           child: const Text(
+//                             'Top Seller',
+//                             style: TextStyle(
+//                               color: Colors.white,
+//                               fontSize: 12,
+//                             ),
+//                           ),
+//                         ),
+//                       )
+//                     : const SizedBox
+//                         .shrink(), // Koşul sağlanmadığında boş bir widget döndürür
 
-                Positioned(
-                  right: 1,
-                  child: IconButton(
-                    icon: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isLiked = !isLiked;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Text(
-                '\$${(price * discountRate).toStringAsFixed(2)} ', // %50 indirimli fiyat
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                '\$${price}  ',
-                style: const TextStyle(
-                  color: Color.fromARGB(115, 2, 2, 2),
-                  fontSize: 11,
-                  decoration: TextDecoration.lineThrough,
-                ),
-              ),
-              Text(
-                '${(discountRate * 100).toStringAsFixed(0)}% OFF ',
-                style: TextStyle(
-                  color: Colors.orange.shade700,
-                  fontSize: 11,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-        ],
-      ),
-    );
-  }
-}
+//                 Positioned(
+//                   right: 1,
+//                   child: IconButton(
+//                     icon: Icon(
+//                       isLiked ? Icons.favorite : Icons.favorite_border,
+//                       color: Colors.red,
+//                     ),
+//                     onPressed: () {
+//                       setState(() {
+//                         isLiked = !isLiked;
+//                       });
+//                     },
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           const SizedBox(height: 6),
+//           Text(
+//             title,
+//             style: const TextStyle(
+//               fontSize: 14,
+//             ),
+//           ),
+//           const SizedBox(height: 8),
+//           Row(
+//             children: [
+//               Text(
+//                 '\$${(price * discountRate).toStringAsFixed(2)} ', // %50 indirimli fiyat
+//                 style: const TextStyle(
+//                   fontSize: 17,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               Text(
+//                 '\$$price  ',
+//                 style: const TextStyle(
+//                   color: Color.fromARGB(115, 2, 2, 2),
+//                   fontSize: 11,
+//                   decoration: TextDecoration.lineThrough,
+//                 ),
+//               ),
+//               Text(
+//                 '${(discountRate * 100).toStringAsFixed(0)}% OFF ',
+//                 style: TextStyle(
+//                   color: Colors.orange.shade700,
+//                   fontSize: 11,
+//                 ),
+//               ),
+//             ],
+//           ),
+//           const SizedBox(height: 8),
+//         ],
+//       ),
+//     );
+//   }
+// }
