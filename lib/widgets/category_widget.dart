@@ -30,7 +30,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Image.network(
-                //widget.imageUrl,
+                // widget.imageUrl,
                 'assets/images/fashionIcon.png',
                 width: 48.0,
                 height: 48.0,

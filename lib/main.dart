@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -186,7 +187,7 @@ class MyApp extends StatelessWidget {
                           var data= snapshot.data;
                           return CategoryWidget(
                               title: data==null ? 'Bulunamadı': data['name'],
-                              imageUrl: 'assets/image/fashionIcon.png',
+                              imageUrl: data==null ? 'bulunamadi': data['imageUrl'],
                               );
                         }
                         else{
