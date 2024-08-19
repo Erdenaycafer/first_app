@@ -142,60 +142,63 @@ class MyApp extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                      child: Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.laptop),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                      child: Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.laptop),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                      child: Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.laptop),
-                          ),
-                          const Text("Fashion"),
-                        ],
-                      ),
-                    ),
-                    for (int i = 0; i < 10; i++)
-                      FutureBuilder(
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    //   child: Column(
+                    //     children: [
+                    //       IconButton(
+                    //         onPressed: () {},
+                    //         icon: const Icon(Icons.laptop),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    //   child: Column(
+                    //     children: [
+                    //       IconButton(
+                    //         onPressed: () {},
+                    //         icon: const Icon(Icons.laptop),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    //   child: Column(
+                    //     children: [
+                    //       IconButton(
+                    //         onPressed: () {},
+                    //         icon: const Icon(Icons.laptop),
+                    //       ),
+                    //       const Text("Fashion"),
+                    //     ],
+                    //   ),
+                    // ),
+                    FutureBuilder(
                       future: FirebaseFirestore.instance
-                          .collection('categories')
-                          .doc('XTPGFtFj8DmF3NXCe06e')
+                          .collection("categories")
+                          // .orderBy("name", descending: true)
                           .get(),
                       builder: (_, snapshot) {
                         if (snapshot.hasData) {
-                          var data= snapshot.data;
-                          return CategoryWidget(
-                              title: data==null ? 'Bulunamadı': data['name'],
-                              imageUrl: data==null ? 'bulunamadi': data['imageUrl'],
-                              );
-                        }
-                        else{
+                          final categoryList =
+                              snapshot.data!.docs.reversed.map((e) => e.data());
+                          return Row(
+                            children: [
+                              for (final data in categoryList)
+                                CategoryWidget(
+                                  title: data['name'],
+                                  imageUrl: data['imageUrl'],
+                                ),
+                            ],
+                          );
+                        } else {
                           return const CircularProgressIndicator();
                         }
                       },
                     ),
-                    
                   ],
                 ),
               ),
