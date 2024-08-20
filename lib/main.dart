@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:ui';
 // import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:main_app/firebase_options.dart';
 import 'package:main_app/widgets/anasayfa_urun_widget.dart';
 import 'package:main_app/widgets/category_widget.dart';
